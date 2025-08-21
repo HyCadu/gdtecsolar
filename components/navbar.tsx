@@ -10,17 +10,8 @@ import Image from "next/image"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
   const [showSegmentsDropdown, setShowSegmentsDropdown] = useState(false)
   const pathname = usePathname()
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
 
   const navLinks = [
     { href: "/", label: "Início" },
@@ -48,16 +39,11 @@ export default function Navbar() {
   }
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md transition-all duration-300"
-    >
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md transform-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center space-x-3 group">
-            <motion.div whileHover={{ scale: 1.05 }}>
+            <div className="hover:scale-105 transition-transform duration-200">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-eALzW5oxAYTEV8khzb3mvp8qg2Qpy3.png"
                 alt="GDTEC Energia Solar"
@@ -65,7 +51,7 @@ export default function Navbar() {
                 height={40}
                 className="h-10 w-auto"
               />
-            </motion.div>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -139,17 +125,16 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <motion.a
-              whileHover={{ scale: 1.05 }}
+            <a
               href="tel:+5511999999999"
-              className="flex items-center space-x-2 text-[#2D4A5B] hover:text-[#EB582D] transition-colors"
+              className="flex items-center space-x-2 text-[#2D4A5B] hover:text-[#EB582D] transition-colors hover:scale-105 transform duration-200"
             >
               <Phone className="w-4 h-4" />
               <span className="text-sm font-medium">(11) 99999-9999</span>
-            </motion.a>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            </a>
+            <div className="hover:scale-105 transform duration-200">
               <Button className="bg-[#EB582D] hover:bg-[#EB582D]/90 text-white">Orçamento Grátis</Button>
-            </motion.div>
+            </div>
           </div>
 
           <div className="md:hidden">
@@ -159,9 +144,9 @@ export default function Navbar() {
               onClick={() => setIsOpen(!isOpen)}
               className="text-[#2D4A5B] hover:text-[#EB582D] transition-colors"
             >
-              <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+              <div className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </motion.div>
+              </div>
             </Button>
           </div>
         </div>
@@ -241,6 +226,6 @@ export default function Navbar() {
           )}
         </AnimatePresence>
       </div>
-    </motion.nav>
+    </nav>
   )
 }
