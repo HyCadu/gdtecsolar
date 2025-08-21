@@ -126,14 +126,14 @@ export default function SuccessCases() {
                   </div>
 
                   {/* Stats */}
-                  <div className="grid grid-cols-2 gap-4 py-4">
-                    <div className="text-center p-4 bg-[#F5F5F5] rounded-lg">
-                      <div className="text-2xl font-bold text-[#FF6B35]">{currentCaseData.power}</div>
-                      <div className="text-sm text-gray-600">Potência Instalada</div>
+                  <div className="grid grid-cols-2 gap-3 py-4">
+                    <div className="text-center p-3 bg-[#F5F5F5] rounded-lg">
+                      <div className="text-xl font-bold text-[#FF6B35] mb-1">{currentCaseData.power}</div>
+                      <div className="text-xs text-gray-600 leading-tight">Potência Instalada</div>
                     </div>
-                    <div className="text-center p-4 bg-[#F5F5F5] rounded-lg">
-                      <div className="text-2xl font-bold text-[#FF6B35]">{currentCaseData.savings}</div>
-                      <div className="text-sm text-gray-600">Economia Anual</div>
+                    <div className="text-center p-3 bg-[#F5F5F5] rounded-lg">
+                      <div className="text-xl font-bold text-[#FF6B35] mb-1">{currentCaseData.savings}</div>
+                      <div className="text-xs text-gray-600 leading-tight">Economia Anual</div>
                     </div>
                   </div>
 
