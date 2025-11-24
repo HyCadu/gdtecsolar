@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import WhatsAppButton from "@/components/whatsapp-button"
 import SimulatorPanel from "@/components/simulator-panel"
+import { SimulatorProvider } from "@/contexts/simulator-context"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,15 +40,17 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans">
-        <div className="min-h-screen flex flex-col">
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+        <SimulatorProvider>
+          <div className="min-h-screen flex flex-col">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
 
-          {/* Global floating elements */}
-          <WhatsAppButton />
-          <SimulatorPanel />
-        </div>
+            {/* Global floating elements */}
+            <WhatsAppButton />
+            <SimulatorPanel />
+          </div>
+        </SimulatorProvider>
       </body>
     </html>
   )

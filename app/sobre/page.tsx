@@ -25,28 +25,34 @@ export default function SobrePage() {
   ]
 
   const stats = [
-    { number: "5000+", label: "Projetos Realizados" },
+    { number: "1.000+", label: "Projetos Realizados" },
     { number: "100MW", label: "Potência Instalada" },
     { number: "98%", label: "Satisfação dos Clientes" },
     { number: "100%", label: "Compromisso" },
   ]
 
+  // Estrutura preparada para receber as fotos do Gabriel
+  // Formato esperado: fotos estilo LinkedIn (quadradas, profissionais)
   const team = [
     {
-      name: "João Silva",
-      role: "CEO & Fundador",
-      description: "Engenheiro Elétrico especialista em energia renovável",
+      name: "Gabriel",
+      role: "Diretor",
+      description: "Fundador e líder da GDTEC",
+      image: "/team/gabriel.jpg", // Foto será enviada pelo Gabriel
     },
     {
-      name: "Maria Santos",
-      role: "Diretora Técnica",
-      description: "Especialista em sistemas fotovoltaicos e gestão de projetos de grande porte",
-    },
-    {
-      name: "Carlos Oliveira",
+      name: "Diretor Comercial",
       role: "Diretor Comercial",
-      description: "Especialista em desenvolvimento de negócios e relacionamento com clientes",
+      description: "Responsável pela expansão comercial e relacionamento com clientes",
+      image: "/team/diretor-comercial.jpg", // Foto será enviada
     },
+    {
+      name: "Japa",
+      role: "Líder Técnico",
+      description: "Especialista em instalação e manutenção de sistemas fotovoltaicos",
+      image: "/team/japa.jpg", // Foto será enviada
+    },
+    // Adicionar mais membros conforme as fotos forem enviadas
   ]
 
   return (
@@ -150,9 +156,21 @@ export default function SobrePage() {
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
+              className="relative flex justify-center"
             >
-              <img src="/placeholder.svg?height=400&width=600" alt="Equipe GDTEC" className="rounded-2xl shadow-2xl" />
+              <div className="w-full max-w-sm mx-auto">
+                <div className="relative rounded-2xl shadow-2xl overflow-hidden bg-black" style={{ aspectRatio: "9/16" }}>
+                  <video
+                    className="w-full h-full object-cover"
+                    controls
+                    playsInline
+                    poster="/placeholder.svg"
+                  >
+                    <source src="/videos/gabriel-historia-gdtec.mp4" type="video/mp4" />
+                    Seu navegador não suporta o elemento de vídeo.
+                  </video>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -169,20 +187,30 @@ export default function SobrePage() {
           >
             Nossa Liderança
           </motion.h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {team.map((member, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white rounded-xl shadow-lg p-8 text-center"
+                className="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow"
               >
-                <div className="w-24 h-24 bg-gradient-to-r from-[#004E64] to-[#FF6B35] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Users className="w-12 h-12 text-white" />
+                <div className="relative w-32 h-32 mx-auto mb-6">
+                  {member.image ? (
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover rounded-full border-4 border-[#FF6B35] shadow-lg"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-r from-[#004E64] to-[#FF6B35] rounded-full flex items-center justify-center border-4 border-[#FF6B35] shadow-lg">
+                      <Users className="w-16 h-16 text-white" />
+                    </div>
+                  )}
                 </div>
                 <h3 className="text-xl font-bold text-[#004E64] mb-2">{member.name}</h3>
-                <p className="text-[#FF6B35] font-medium mb-4">{member.role}</p>
+                <p className="text-[#FF6B35] font-semibold mb-3">{member.role}</p>
                 <p className="text-gray-600 text-sm leading-relaxed">{member.description}</p>
               </motion.div>
             ))}

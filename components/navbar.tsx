@@ -8,13 +8,19 @@ import { Menu, X, Phone, ChevronDown } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [showSegmentsDropdown, setShowSegmentsDropdown] = useState(false)
   const pathname = usePathname()
+  const handleWhatsAppClick = () => {
+    const message = encodeURIComponent("Olá! Gostaria de saber mais sobre energia solar da GDTEC.")
+    window.open(`https://wa.me/5527992632552?text=${message}`, "_blank")
+  }
 
   const navLinks = [
     { href: "/", label: "Início" },
+    { href: "/sobre", label: "Sobre Nós" },
     {
       href: "/segmentos",
       label: "Segmentos",
@@ -26,8 +32,8 @@ export default function Navbar() {
         { href: "/segmentos/rural", label: "Rural" },
       ],
     },
-    { href: "/cases", label: "Cases" },
-    { href: "/sobre", label: "Sobre Nós" },
+    { href: "/cases", label: "Projetos de Sucesso" },
+    { href: "/financiamentos", label: "Financiamentos" },
     { href: "/depoimentos", label: "Depoimentos" },
     { href: "/contato", label: "Contato" },
     { href: "/faq", label: "FAQ" },
@@ -42,7 +48,7 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md transform-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center space-x-3 group">
+          <Link href="/" className="flex items-center space-x-3 group -ml-1 sm:-ml-3 lg:-ml-3">
             <div className="hover:scale-105 transition-transform duration-200">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-eALzW5oxAYTEV8khzb3mvp8qg2Qpy3.png"
@@ -55,7 +61,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
               <div key={link.href} className="relative group">
                 {link.hasDropdown ? (
@@ -124,16 +130,10 @@ export default function Navbar() {
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex items-center space-x-4">
-            <a
-              href="tel:+5511999999999"
-              className="flex items-center space-x-2 text-[#2D4A5B] hover:text-[#EB582D] transition-colors hover:scale-105 transform duration-200"
-            >
-              <Phone className="w-4 h-4" />
-              <span className="text-sm font-medium">(11) 99999-9999</span>
-            </a>
+          <div className="hidden md:flex items-center space-x-4 -mr-2 sm:-mr-4 lg:-mr-6">
+            
             <div className="hover:scale-105 transform duration-200">
-              <Button className="bg-[#EB582D] hover:bg-[#EB582D]/90 text-white">Orçamento Grátis</Button>
+              <Button className="bg-[#EB582D] hover:bg-[#EB582D]/90 text-white" onClick={handleWhatsAppClick}>Orçamento Grátis</Button>
             </div>
           </div>
 
@@ -215,9 +215,9 @@ export default function Navbar() {
                   transition={{ duration: 0.3, delay: 0.4 }}
                   className="px-3 py-2 space-y-2"
                 >
-                  <a href="tel:+5511999999999" className="flex items-center space-x-2 text-[#2D4A5B]">
+                  <a href="tel:+5527992632552" className="flex items-center space-x-2 text-[#2D4A5B]">
                     <Phone className="w-4 h-4" />
-                    <span className="text-sm">(11) 99999-9999</span>
+                    <span className="text-sm">(27) 99263-2552</span>
                   </a>
                   <Button className="w-full bg-[#EB582D] hover:bg-[#EB582D]/90 text-white">Orçamento Grátis</Button>
                 </motion.div>

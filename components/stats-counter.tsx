@@ -53,7 +53,7 @@ function Counter({ end, duration = 2000, prefix = "", suffix = "" }: CounterProp
   }, [isVisible, end, duration])
 
   return (
-    <div ref={ref} className="text-4xl md:text-5xl font-bold text-white">
+    <div ref={ref} className="text-3xl md:text-4xl font-bold text-white">
       {prefix}
       {count.toLocaleString("pt-BR")}
       {suffix}
@@ -63,31 +63,31 @@ function Counter({ end, duration = 2000, prefix = "", suffix = "" }: CounterProp
 
 export default function StatsCounter() {
   return (
-    <section className="bg-[#004E64] py-8 md:py-8">
+    <section className="bg-[#004E64] py-6 md:py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-          <div className="space-y-2">
-            <Counter end={500} suffix="+" />
-            <p className="text-white/90 text-base font-medium">Projetos Entregues</p>
-            <p className="text-white/70 text-sm">Em todo o Brasil</p>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+          <div className="space-y-1.5">
+            <Counter end={1000} prefix="+ de " />
+            <p className="text-white/90 text-sm font-medium">Projetos Entregues</p>
+            <p className="text-white/70 text-xs">+ de 1.000 projetos entregues em todo o Brasil</p>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <Counter end={2} prefix="R$ " suffix="M+" />
-            <p className="text-white/90 text-base font-medium">Economia Gerada</p>
-            <p className="text-white/70 text-sm">Para nossos clientes</p>
+            <p className="text-white/90 text-sm font-medium">Economia Gerada</p>
+            <p className="text-white/70 text-xs">Para nossos clientes</p>
           </div>
 
-          <div className="space-y-2">
-            <Counter end={15000} suffix="+" />
-            <p className="text-white/90 text-base font-medium">Módulos Instalados</p>
-            <p className="text-white/70 text-sm">Alta eficiência</p>
+          <div className="space-y-1.5">
+            <Counter end={30000} prefix="+ de " />
+            <p className="text-white/90 text-sm font-medium">Módulos Instalados</p>
+            <p className="text-white/70 text-xs">Alta eficiência</p>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <Counter end={100} suffix="%" />
-            <p className="text-white/90 text-base font-medium">Satisfação</p>
-            <p className="text-white/70 text-sm">Dos clientes</p>
+            <p className="text-white/90 text-sm font-medium">Satisfação</p>
+            <p className="text-white/70 text-xs">Dos clientes</p>
           </div>
         </div>
       </div>

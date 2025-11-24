@@ -62,7 +62,7 @@ export default function AboutSection() {
               })}
             </div>
 
-            <Button className="bg-[#004E64] hover:bg-[#004E64]/90 text-white px-8 py-3">Conheça Nossa História</Button>
+            
           </div>
 
           {/* Image */}
@@ -79,15 +79,15 @@ export default function AboutSection() {
             {/* Floating Stats */}
             <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl">
               <div className="text-center">
-                <div className="text-3xl font-bold text-[#FF6B35] mb-1">500+</div>
+                <div className="text-3xl font-bold text-[#FF6B35] mb-1">1.000+</div>
                 <div className="text-sm text-gray-600">Projetos Entregues</div>
               </div>
             </div>
 
             <div className="absolute -top-6 -right-6 bg-white p-6 rounded-xl shadow-xl">
               <div className="text-center">
-                <div className="text-3xl font-bold text-[#FF6B35] mb-1">500+</div>
-                <div className="text-sm text-gray-600">Projetos Entregues</div>
+                <div className="text-3xl font-bold text-[#FF6B35] mb-1">30.000+</div>
+                <div className="text-sm text-gray-600">Módulos Instalados</div>
               </div>
             </div>
           </div>

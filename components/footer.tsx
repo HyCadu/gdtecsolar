@@ -52,22 +52,22 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#sobre" className="text-gray-400 hover:text-white transition-colors">
+                <a href="/sobre" className="text-gray-400 hover:text-white transition-colors">
                   Sobre Nós
                 </a>
               </li>
               <li>
-                <a href="#cases" className="text-gray-400 hover:text-white transition-colors">
+                <a href="/cases" className="text-gray-400 hover:text-white transition-colors">
                   Cases de Sucesso
                 </a>
               </li>
               <li>
-                <a href="#faq" className="text-gray-400 hover:text-white transition-colors">
+                <a href="/faq" className="text-gray-400 hover:text-white transition-colors">
                   FAQ
                 </a>
               </li>
               <li>
-                <a href="#contato" className="text-gray-400 hover:text-white transition-colors">
+                <a href="/contato" className="text-gray-400 hover:text-white transition-colors">
                   Contato
                 </a>
               </li>
@@ -106,8 +106,7 @@ export default function Footer() {
               <div className="flex items-start space-x-3">
                 <Phone className="w-5 h-5 text-[#EB582D] mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-gray-400">(11) 99999-9999</p>
-                  <p className="text-gray-400">(11) 3333-3333</p>
+                  <p className="text-gray-400">(27) 99263-2552</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
@@ -121,11 +120,9 @@ export default function Footer() {
                 <MapPin className="w-5 h-5 text-[#EB582D] mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="text-gray-400">
-                    Rua das Energias, 123
-                    <br />
-                    Vila Solar - São Paulo, SP
-                    <br />
-                    CEP: 01234-567
+                  Av. Paulo Pereira Gomes, 1156-A | Edifício Ventura Office
+                  <br />Morada de Laranjeiras
+                  <br />Serra - ES, 29166-828
                   </p>
                 </div>
               </div>
