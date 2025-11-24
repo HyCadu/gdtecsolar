@@ -3,6 +3,8 @@
 import { motion } from "framer-motion"
 import { Building, TrendingUp, Shield, Clock, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { Phone } from "lucide-react"
 
 export default function ComercialPage() {
   const benefits = [
@@ -46,9 +48,11 @@ export default function ComercialPage() {
               <p className="text-xl text-white/90 mb-8 leading-relaxed">
                 Reduza custos operacionais e aumente a competitividade do seu negócio com energia solar comercial
               </p>
+              <Link href="/contato">
               <Button size="lg" className="bg-white text-[#004E64] hover:bg-white/90 px-8 py-4 text-lg font-semibold">
                 Solicitar Orçamento
               </Button>
+              </Link>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -57,9 +61,9 @@ export default function ComercialPage() {
               className="relative"
             >
               <img
-                src="/placeholder.svg?height=400&width=600"
+                src="/factory-solar-installation.png"
                 alt="Energia Solar Comercial"
-                className="rounded-2xl shadow-2xl"
+                className="rounded-2xl shadow-2xl w-full h-auto"
               />
             </motion.div>
           </div>
@@ -136,16 +140,17 @@ export default function ComercialPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
+            <Link href="/contato">
             <Button size="lg" className="bg-[#FF6B35] hover:bg-[#FF6B35]/90 text-white px-8 py-4 text-lg">
               Solicitar Orçamento
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-[#004E64] text-[#004E64] hover:bg-[#004E64] hover:text-white px-8 py-4 text-lg bg-transparent"
-            >
-              Falar com Especialista
-            </Button>
+            </Link>
+            <a href="tel:+5527992632552">
+              <Button size="lg" className="bg-white text-[#004E64] hover:bg-white/90 px-8 py-4 text-lg font-semibold">
+                <Phone className="w-5 h-5 mr-2" />
+                Falar com Especialista
+              </Button>
+            </a>
           </motion.div>
         </div>
       </section>

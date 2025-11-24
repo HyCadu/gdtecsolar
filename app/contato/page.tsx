@@ -48,7 +48,6 @@ export default function ContatoPage() {
       icon: MapPin,
       title: "Endereço",
       details: [
-        "Edifício Ventura Office",
         "Av. Paulo Pereira Gomes, 1156-A",
         "Morada de Laranjeiras, Serra - ES",
         "CEP: 29166-828",
@@ -58,7 +57,7 @@ export default function ContatoPage() {
     {
       icon: Clock,
       title: "Horário",
-      details: ["Segunda à Sexta: 8h às 18h", "Sábado: 8h às 12h"],
+      details: ["Segunda à Sexta: 8h às 18h"],
       action: "#",
     },
   ]

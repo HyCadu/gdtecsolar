@@ -3,8 +3,10 @@
 import { motion } from "framer-motion"
 import { Tractor, Droplets, Wheat, Sun, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export default function RuralPage() {
+  
   const applications = [
     "Irrigação e bombeamento de água",
     "Eletrificação de propriedades rurais",
@@ -46,9 +48,11 @@ export default function RuralPage() {
               <p className="text-xl text-white/90 mb-8 leading-relaxed">
                 Energia limpa para propriedades rurais, agronegócio e sistemas de irrigação
               </p>
+              <Link href="/contato">
               <Button size="lg" className="bg-white text-[#004E64] hover:bg-white/90 px-8 py-4 text-lg font-semibold">
                 Solicitar Orçamento
               </Button>
+              </Link>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -57,9 +61,9 @@ export default function RuralPage() {
               className="relative"
             >
               <img
-                src="/placeholder.svg?height=400&width=600"
+                src="/farm-solar-building.png"
                 alt="Energia Solar Rural"
-                className="rounded-2xl shadow-2xl"
+                className="rounded-2xl shadow-2xl w-full h-auto"
               />
             </motion.div>
           </div>
@@ -188,16 +192,12 @@ export default function RuralPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button size="lg" className="bg-white text-[#004E64] hover:bg-white/90 px-8 py-4 text-lg font-semibold">
+            <Link href="/contato">
+            <Button size="lg" className="bg-[#FF6B35] hover:bg-[#FF6B35]/90 text-white px-8 py-4 text-lg">
               Solicitar Visita Técnica
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-[#004E64] px-8 py-4 text-lg bg-transparent"
-            >
-              Calcular Economia
-            </Button>
+            </Link>
+            
           </motion.div>
         </div>
       </section>

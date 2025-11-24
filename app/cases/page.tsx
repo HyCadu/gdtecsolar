@@ -51,7 +51,7 @@ export default function CasesPage() {
             transition={{ duration: 0.8 }}
             className="text-center text-white"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Cases de Sucesso</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">Projetos de Sucesso</h1>
             <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
               Conheça alguns dos nossos projetos realizados e os resultados alcançados
             </p>

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { Users, Award, Target, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export default function SobrePage() {
   const values = [
@@ -242,9 +243,14 @@ export default function SobrePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <Button size="lg" className="bg-white text-[#004E64] hover:bg-white/90 px-8 py-4 text-lg font-semibold">
-              Fale Conosco
-            </Button>
+            <Link href="/contato">
+              <Button size="lg" className="bg-white text-[#004E64] hover:bg-white/90 px-8 py-4 text-lg font-semibold">
+              <span className="relative">
+                Fale Conosco
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+              </span>
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </section>

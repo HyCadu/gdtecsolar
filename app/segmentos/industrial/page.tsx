@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { Factory, Zap, DollarSign, Leaf, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export default function IndustrialPage() {
   const benefits = [
@@ -35,9 +36,11 @@ export default function IndustrialPage() {
               <p className="text-xl text-white/90 mb-8 leading-relaxed">
                 Sistemas de grande porte para indústrias com alta demanda energética e máxima eficiência
               </p>
+              <Link href="/contato">
               <Button size="lg" className="bg-white text-[#004E64] hover:bg-white/90 px-8 py-4 text-lg font-semibold">
-                Solicitar Projeto
+                Solicitar Orçamento
               </Button>
+              </Link>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -46,9 +49,9 @@ export default function IndustrialPage() {
               className="relative"
             >
               <img
-                src="/placeholder.svg?height=400&width=600"
+                src="/factory-solar-installation.png"
                 alt="Energia Solar Industrial"
-                className="rounded-2xl shadow-2xl"
+                className="rounded-2xl shadow-2xl w-full h-auto"
               />
             </motion.div>
           </div>
@@ -151,9 +154,11 @@ export default function IndustrialPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <Button size="lg" className="bg-white text-[#004E64] hover:bg-white/90 px-8 py-4 text-lg font-semibold">
-              Falar com Especialista
+            <Link href="/contato">
+            <Button size="lg" className="bg-[#FF6B35] hover:bg-[#FF6B35]/90 text-white px-8 py-4 text-lg">
+              Solicitar Orçamento
             </Button>
+            </Link>
           </motion.div>
         </div>
       </section>

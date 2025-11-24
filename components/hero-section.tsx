@@ -3,11 +3,12 @@
 import { Button } from "@/components/ui/button"
 import { Calculator, MessageCircle } from "lucide-react"
 import { useSimulator } from "@/contexts/simulator-context"
+import Link from "next/link"
 
 export default function HeroSection() {
   const { openSimulator } = useSimulator()
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 sm:pt-32 lg:pt-20">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         <video
@@ -26,7 +27,7 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Headlines */}
-        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight px-2">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight tracking-tight sm:tracking-tighter px-2">
         Soluções solares que geram 
           <span className="block text-[#FF6B35] mt-1 sm:mt-2">Economia e Sustentabilidade. </span>
         </h1>
@@ -37,14 +38,16 @@ export default function HeroSection() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 px-4">
-          <Button
-            size="lg"
-            className="bg-[#FF6B35] hover:bg-[#FF6B35]/90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
-          >
-            <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-            <span className="hidden sm:inline">Solicite um Orçamento Grátis</span>
-            <span className="sm:hidden">Orçamento Grátis</span>
-          </Button>
+          <a href="#contato" className="w-full sm:w-auto">
+            <Button
+              size="lg"
+              className="bg-[#FF6B35] hover:bg-[#FF6B35]/90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
+            >
+              <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+              <span className="hidden sm:inline">Solicite um Orçamento Grátis</span>
+              <span className="sm:hidden">Orçamento Grátis</span>
+            </Button>
+          </a>
 
           <Button
             size="lg"

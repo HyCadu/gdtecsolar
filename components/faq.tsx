@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { motion } from "framer-motion"
 import { Plus, Minus } from "lucide-react"
 import { useState } from "react"
@@ -122,12 +123,15 @@ export default function FAQ() {
           className="text-center mt-12"
         >
           <p className="text-gray-600 mb-6">Não encontrou sua resposta?</p>
-          <button className="bg-[#FF6B35] text-white px-8 py-3 rounded-lg hover:bg-[#FF6B35]/90 transition-colors relative group">
+          <Link
+            href="/contato"
+            className="inline-flex items-center justify-center bg-[#FF6B35] text-white px-8 py-3 rounded-lg hover:bg-[#FF6B35]/90 transition-colors relative group"
+          >
             <span className="relative">
               Entre em Contato
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
             </span>
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>
