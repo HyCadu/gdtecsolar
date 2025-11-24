@@ -1,5 +1,13 @@
 import { Facebook, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react"
 import Image from "next/image"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 export default function Footer() {
   return (
@@ -10,10 +18,10 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-eALzW5oxAYTEV8khzb3mvp8qg2Qpy3.png"
+                src="/GDTEC_logo_branco.png"
                 alt="GDTEC Energia Solar"
-                width={120}
-                height={40}
+                width={250}
+                height={100}
                 className="h-10 w-auto brightness-0 invert"
               />
             </div>
@@ -22,18 +30,18 @@ export default function Footer() {
               completas em energia solar fotovoltaica.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-[#EB582D] transition-colors">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-[#EB582D] transition-colors">
+             <a href="https://www.instagram.com/gdtecsolar/" className="text-gray-400 hover:text-[#EB582D] transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-[#EB582D] transition-colors">
+              <a href="https://www.facebook.com/gdtecsolar/" className="text-gray-400 hover:text-[#EB582D] transition-colors">
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a href="https://www.linkedin.com/company/gdtecsolar/" className="text-gray-400 hover:text-[#EB582D] transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-[#EB582D] transition-colors">
+              {/*<a href="#" className="text-gray-400 hover:text-[#EB582D] transition-colors">
                 <Youtube className="w-5 h-5" />
-              </a>
+              </a>*/}
             </div>
           </div>
 
@@ -42,12 +50,12 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4 text-[#EB582D]">Links Rápidos</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#inicio" className="text-gray-400 hover:text-white transition-colors">
+                <a href="/" className="text-gray-400 hover:text-white transition-colors">
                   Início
                 </a>
               </li>
               <li>
-                <a href="#servicos" className="text-gray-400 hover:text-white transition-colors">
+                <a href="/segmentos" className="text-gray-400 hover:text-white transition-colors">
                   Serviços
                 </a>
               </li>
@@ -58,7 +66,7 @@ export default function Footer() {
               </li>
               <li>
                 <a href="/cases" className="text-gray-400 hover:text-white transition-colors">
-                  Cases de Sucesso
+                  Projetos de Sucesso
                 </a>
               </li>
               <li>
@@ -134,16 +142,76 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">© 2024 GDTEC Energia Solar. Todos os direitos reservados.</p>
-            <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                Política de Privacidade
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                Termos de Uso
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                LGPD
-              </a>
+            <div className="flex flex-wrap justify-center md:justify-end gap-4 text-sm">
+              <Dialog>
+                <DialogTrigger className="text-gray-400 hover:text-white transition-colors border-b border-transparent hover:border-[#EB582D] pb-0.5">
+                  Política de Privacidade
+                </DialogTrigger>
+                <DialogContent className="max-w-3xl bg-white text-gray-700">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-bold text-[#EB582D]">Política de Privacidade</DialogTitle>
+                    <DialogDescription className="text-gray-500">
+                      Entenda como coletamos, utilizamos e protegemos os seus dados nos serviços GDTEC.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4 text-sm leading-relaxed max-h-[70vh] overflow-y-auto pr-2">
+                    <p>
+                      Valorizamos a transparência e tratamos suas informações pessoais com responsabilidade. Os dados
+                      informados em formulários, simulações ou canais de atendimento são armazenados de maneira segura e
+                      utilizados exclusivamente para apresentar soluções em energia solar, realizar follow-ups e cumprir
+                      obrigações legais.
+                    </p>
+                    <div>
+                      <h4 className="text-[#004E64] font-semibold mb-2">Como utilizamos seus dados</h4>
+                      <ul className="list-disc pl-5 space-y-1 text-gray-600">
+                        <li>Envio de propostas personalizadas e acompanhamento comercial.</li>
+                        <li>Comunicação sobre etapas do projeto, suporte técnico e novidades relevantes.</li>
+                        <li>Geração de relatórios internos para melhoria contínua dos serviços.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="text-[#004E64] font-semibold mb-2">Seus direitos</h4>
+                      <p>
+                        Você pode solicitar a atualização ou remoção dos seus dados a qualquer momento. Basta entrar em
+                        contato pelos canais oficiais da GDTEC que responderemos rapidamente, seguindo as diretrizes da
+                        LGPD.
+                      </p>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+              <Dialog>
+                <DialogTrigger className="text-gray-400 hover:text-white transition-colors border-b border-transparent hover:border-[#EB582D] pb-0.5">
+                  Termos de Uso
+                </DialogTrigger>
+                <DialogContent className="max-w-3xl bg-white text-gray-700">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-bold text-[#EB582D]">Termos de Uso</DialogTitle>
+                    <DialogDescription className="text-gray-500">
+                      Saiba como utilizar o site e os serviços digitais da GDTEC com segurança e clareza.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4 text-sm leading-relaxed max-h-[70vh] overflow-y-auto pr-2">
+                    <p>
+                      Ao navegar por nossas páginas, o usuário concorda em utilizar os conteúdos apenas para fins
+                      informativos ou de contratação dos serviços GDTEC. Todo o material visual e textual é protegido
+                      por direitos autorais e não pode ser reproduzido sem autorização prévia.
+                    </p>
+                    <div>
+                      <h4 className="text-[#004E64] font-semibold mb-2">Responsabilidades do usuário</h4>
+                      <ul className="list-disc pl-5 space-y-1 text-gray-600">
+                        <li>Fornecer informações verídicas ao solicitar orçamento ou suporte.</li>
+                        <li>Não realizar ações que comprometam a segurança ou disponibilidade do site.</li>
+                        <li>Respeitar a privacidade e a propriedade intelectual da GDTEC.</li>
+                      </ul>
+                    </div>
+                    <p>
+                      Reservamo-nos o direito de atualizar estes termos para acompanhar ajustes legais ou melhorias de
+                      produto. Recomendamos revisar o conteúdo regularmente.
+                    </p>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>

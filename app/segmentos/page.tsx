@@ -10,7 +10,7 @@ const segments = [
     title: "Residencial",
     description: "Soluções completas em energia solar para sua casa",
     icon: Home,
-    image: "/casa-solar.png",
+    image: "/residential-solar-roof.png",
     benefits: ["Redução de até 95% na conta de luz", "Valorização do imóvel", "Sustentabilidade"],
     href: "/segmentos/residencial",
   },
@@ -19,7 +19,7 @@ const segments = [
     title: "Comercial",
     description: "Energia solar para empresas e comércios",
     icon: Building2,
-    image: "/comercial-solar.png",
+    image: "/factory-solar-installation.png",
     benefits: ["Redução de custos operacionais", "Competitividade no mercado", "Responsabilidade ambiental"],
     href: "/segmentos/comercial",
   },
@@ -28,7 +28,7 @@ const segments = [
     title: "Industrial",
     description: "Grandes projetos de energia solar para indústrias",
     icon: Factory,
-    image: "/industrial-solar.png",
+    image: "/factory-solar-installation.png",
     benefits: ["Economia em grande escala", "Energia limpa e renovável", "Independência energética"],
     href: "/segmentos/industrial",
   },
@@ -37,7 +37,7 @@ const segments = [
     title: "Rural",
     description: "Energia solar para propriedades rurais e agronegócio",
     icon: Zap,
-    image: "/rural-solar.png",
+    image: "/farm-solar-building.png",
     benefits: ["Energia para irrigação", "Redução de custos", "Sustentabilidade no campo"],
     href: "/segmentos/rural",
   },
@@ -48,7 +48,7 @@ export default function SegmentosPage() {
     <main className="pt-20">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-[#004E64] to-[#FF6B35] py-20">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ export default function SegmentosPage() {
 
       {/* Segments Grid */}
       <section className="py-20 bg-[#F5F5F5]">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8">
             {segments.map((segment, index) => (
               <motion.div
@@ -75,8 +75,18 @@ export default function SegmentosPage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
               >
-                <div className="aspect-video bg-gradient-to-br from-[#004E64]/10 to-[#FF6B35]/10 flex items-center justify-center">
-                  <segment.icon className="w-20 h-20 text-[#004E64]" />
+                <div className="relative aspect-video overflow-hidden">
+                  <img
+                    src={segment.image}
+                    alt={segment.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#004E64]/80 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4">
+                    <div className="w-12 h-12 bg-[#FF6B35] rounded-lg flex items-center justify-center mb-2">
+                      <segment.icon className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
                 </div>
                 <div className="p-8">
                   <h3 className="text-2xl font-bold text-[#004E64] mb-4">{segment.title}</h3>

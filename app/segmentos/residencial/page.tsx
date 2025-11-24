@@ -2,38 +2,51 @@
 
 import { motion } from "framer-motion"
 import { Home, Zap, TrendingUp, Shield, Calculator, Phone } from "lucide-react"
+import Link from "next/link"
 
 export default function ResidencialPage() {
   return (
     <main className="pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-gdtec-blue to-gdtec-green py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center text-white"
-          >
-            <Home className="w-16 h-16 mx-auto mb-6" />
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Energia Solar Residencial</h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-              Transforme sua casa em uma fonte de energia limpa e econômica
-            </p>
-          </motion.div>
+      <section className="bg-gradient-to-br from-[#004E64] to-[#FF6B35] py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
+              <div className="flex items-center mb-6">
+                <Home className="w-12 h-12 text-white mr-4" />
+                <span className="text-white/80 text-lg font-medium">Segmento Residencial</span>
+              </div>
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Energia Solar Residencial</h1>
+              <p className="text-xl text-white/90 mb-8 leading-relaxed">
+                Transforme sua casa em uma fonte de energia limpa e econômica
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative"
+            >
+              <img
+                src="/residential-solar-roof.png"
+                alt="Energia Solar Residencial"
+                className="rounded-2xl shadow-2xl w-full h-auto"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Benefits Section */}
       <section className="py-20">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gdtec-dark mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#004E64] mb-6">
               Vantagens da Energia Solar Residencial
             </h2>
           </motion.div>
@@ -68,8 +81,8 @@ export default function ResidencialPage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="text-center p-6 bg-white rounded-xl shadow-lg"
               >
-                <benefit.icon className="w-12 h-12 text-gdtec-blue mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-gdtec-dark mb-3">{benefit.title}</h3>
+                <benefit.icon className="w-12 h-12 text-[#FF6B35] mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-[#004E64] mb-3">{benefit.title}</h3>
                 <p className="text-gray-600">{benefit.description}</p>
               </motion.div>
             ))}
@@ -78,15 +91,15 @@ export default function ResidencialPage() {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-[#F5F5F5]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gdtec-dark mb-6">Como Funciona o Processo</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#004E64] mb-6">Como Funciona o Processo</h2>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -114,10 +127,10 @@ export default function ResidencialPage() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="text-center"
               >
-                <div className="w-16 h-16 bg-gdtec-blue text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">
+                <div className="w-16 h-16 bg-[#FF6B35] text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">
                   {step.step}
                 </div>
-                <h3 className="text-xl font-bold text-gdtec-dark mb-4">{step.title}</h3>
+                <h3 className="text-xl font-bold text-[#004E64] mb-4">{step.title}</h3>
                 <p className="text-gray-600">{step.description}</p>
               </motion.div>
             ))}
@@ -126,17 +139,18 @@ export default function ResidencialPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gdtec-blue">
-        <div className="container mx-auto px-4 text-center">
+      <section className="py-20 bg-gradient-to-r from-[#004E64] to-[#FF6B35]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Pronto para Economizar?</h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               Faça uma simulação gratuita e descubra quanto você pode economizar com energia solar
             </p>
-            <button className="bg-gdtec-green text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gdtec-green/90 transition-colors inline-flex items-center">
-              <Phone className="mr-2 w-5 h-5" />
+            <Link href="/contato">
+            <button className="bg-white text-[#004E64] px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/90 transition-colors inline-flex items-center">
               Solicitar Orçamento Gratuito
             </button>
+            </Link>
           </motion.div>
         </div>
       </section>

@@ -3,6 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Home, Factory, Wheat, Church, Building2, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 const segments = [
   {
@@ -11,6 +12,7 @@ const segments = [
     description: "Soluções personalizadas para sua casa, com economia de até 95% na conta de luz.",
     features: ["Instalação rápida", "Financiamento facilitado", "Garantia de 25 anos"],
     image: "/residential-solar-roof.png",
+    href: "/segmentos/residencial",
   },
   {
     icon: Factory,
@@ -18,6 +20,7 @@ const segments = [
     description: "Projetos de grande porte para reduzir custos operacionais e aumentar competitividade.",
     features: ["Análise de demanda", "ROI otimizado", "Suporte técnico 24/7"],
     image: "/factory-solar-installation.png",
+    href: "/segmentos/industrial",
   },
   {
     icon: Wheat,
@@ -25,6 +28,7 @@ const segments = [
     description: "Energia limpa para propriedades rurais, irrigação e processamento agrícola.",
     features: ["Sistemas robustos", "Resistente ao clima", "Baixa manutenção"],
     image: "/farm-solar-building.png",
+    href: "/segmentos/rural",
   },
   {
     icon: Church,
@@ -32,6 +36,7 @@ const segments = [
     description: "Projetos especiais para templos e instituições religiosas com condições facilitadas.",
     features: ["Condições especiais", "Projeto personalizado", "Instalação cuidadosa"],
     image: "/church-solar-panels.png",
+    href: "/segmentos",
   },
   {
     icon: Building2,
@@ -39,6 +44,7 @@ const segments = [
     description: "Energia solar compartilhada para áreas comuns e unidades condominiais.",
     features: ["Gestão centralizada", "Rateio automático", "Economia coletiva"],
     image: "/condominio.png",
+    href: "/segmentos",
   },
 ]
 
@@ -93,14 +99,15 @@ export default function ServicesSegments() {
                       </li>
                     ))}
                   </ul>
-
-                  <Button
-                    variant="outline"
-                    className="w-full group-hover:bg-[#FF6B35] group-hover:text-white group-hover:border-[#FF6B35] transition-all duration-300 bg-transparent"
-                  >
-                    Saiba Mais
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  <Link href={segment.href || "/segmentos"}>
+                    <Button
+                      variant="outline"
+                      className="w-full group-hover:bg-[#FF6B35] group-hover:text-white group-hover:border-[#FF6B35] transition-all duration-300 bg-transparent"
+                    >
+                      Saiba Mais
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             )

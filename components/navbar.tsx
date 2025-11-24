@@ -48,7 +48,7 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md transform-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center space-x-3 group -ml-1 sm:-ml-3 lg:-ml-3">
+          <Link href="/" className="flex items-center space-x-3 group">
             <div className="hover:scale-105 transition-transform duration-200">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-eALzW5oxAYTEV8khzb3mvp8qg2Qpy3.png"
@@ -130,7 +130,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex items-center space-x-4 -mr-2 sm:-mr-4 lg:-mr-6">
+          <div className="hidden md:flex items-center space-x-4">
             
             <div className="hover:scale-105 transform duration-200">
               <Button className="bg-[#EB582D] hover:bg-[#EB582D]/90 text-white" onClick={handleWhatsAppClick}>Orçamento Grátis</Button>
