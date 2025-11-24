@@ -2,12 +2,13 @@
 
 import { MessageCircle } from "lucide-react"
 
-export default function WhatsAppButton() {
-  const handleWhatsAppClick = () => {
-    const message = encodeURIComponent("Olá! Gostaria de saber mais sobre energia solar da GDTEC.")
-    window.open(`https://wa.me/5511999999999?text=${message}`, "_blank")
-  }
+export const handleWhatsAppClick = () => {
+  const message = encodeURIComponent("Olá! Gostaria de saber mais sobre energia solar da GDTEC.")
+  window.open(`https://wa.me/5527992632552?text=${message}`, "_blank")
+}
 
+export default function WhatsAppButton() {
+  
   return (
     <button
       onClick={handleWhatsAppClick}

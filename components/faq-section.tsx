@@ -100,7 +100,7 @@ export default function FAQSection() {
           <p className="text-gray-600 mb-6">Não encontrou sua dúvida? Entre em contato conosco!</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://wa.me/5511999999999"
+              href="https://wa.me/5527992632552"
               className="inline-flex items-center justify-center px-6 py-3 bg-[#25D366] hover:bg-[#25D366]/90 text-white rounded-lg font-medium transition-colors duration-200 relative group"
             >
               <span className="relative">

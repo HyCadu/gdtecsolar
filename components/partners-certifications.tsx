@@ -1,3 +1,7 @@
+"use client"
+
+import { Users, Wrench, Shield, CreditCard } from "lucide-react"
+
 const partners = [
   {
     name: "Canadian Solar",
@@ -25,35 +29,39 @@ const partners = [
   },
 ]
 
-const certifications = [
+const differentiators = [
   {
-    name: "ANEEL",
-    logo: "/placeholder.svg?height=80&width=160",
+    icon: Users,
+    title: "Equipe de Engenharia",
+    description: "Equipe de engenharia de instalação própria",
   },
   {
-    name: "INMETRO",
-    logo: "/placeholder.svg?height=80&width=160",
+    icon: Wrench,
+    title: "Manutenção Corretiva",
+    description: "5 anos de manutenção corretiva gratuita",
   },
   {
-    name: "ABGD",
-    logo: "/placeholder.svg?height=80&width=160",
+    icon: Shield,
+    title: "Garantia de Instalação",
+    description: "3 anos de garantia da instalação em telhado ou solo",
   },
   {
-    name: "ISO 9001",
-    logo: "/placeholder.svg?height=80&width=160",
+    icon: CreditCard,
+    title: "Credenciamento Bancário",
+    description: "Credenciamento em todos os bancos parceiros para financiamento",
   },
 ]
 
 export default function PartnersCertifications() {
   return (
-    <section className="py-16 md:py-16 bg-[#F5F5F5]">
+    <section className="py-12 md:py-12 bg-[#F5F5F5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Partners Section */}
         <div className="mb-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-[#111111] mb-4">
-              Nossos
-              <span className="text-[#FF6B35]"> Parceiros</span>
+              Marcas
+              <span className="text-[#FF6B35]"> de Qualidade</span>
             </h2>
             <p className="text-lg text-gray-600">Trabalhamos com as melhores marcas do mercado mundial</p>
           </div>
@@ -74,28 +82,32 @@ export default function PartnersCertifications() {
           </div>
         </div>
 
-        {/* Certifications Section */}
+        {/* Differentiators Section */}
         <div>
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold text-[#111111] mb-4">
-              Certificações e<span className="text-[#FF6B35]"> Qualidade</span>
+              Nossos
+              <span className="text-[#FF6B35]"> Diferenciais</span>
             </h2>
-            <p className="text-lg text-gray-600">Certificados pelos principais órgãos reguladores</p>
+            <p className="text-lg text-gray-600">O que nos torna a melhor escolha em energia solar</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
-            {certifications.map((cert, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-105"
-              >
-                <img
-                  src={cert.logo || "/placeholder.svg"}
-                  alt={cert.name}
-                  className="max-h-16 w-auto opacity-70 hover:opacity-100 transition-opacity duration-300"
-                />
-              </div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {differentiators.map((item, index) => {
+              const Icon = item.icon
+              return (
+                <div
+                  key={index}
+                  className="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                >
+                  <div className="w-16 h-16 bg-gradient-to-r from-[#F25C2E] via-[#F15A29] to-[#003B49] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#111111] mb-2">{item.title}</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
+                </div>
+              )
+            })}
           </div>
         </div>
 

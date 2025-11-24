@@ -35,8 +35,8 @@ export default function ContatoPage() {
     {
       icon: Phone,
       title: "Telefone",
-      details: ["(11) 99999-9999", "(11) 3333-3333"],
-      action: "tel:+5511999999999",
+      details: ["(27) 99263-2552"],
+      action: "tel:+5527992632552",
     },
     {
       icon: Mail,
@@ -47,7 +47,12 @@ export default function ContatoPage() {
     {
       icon: MapPin,
       title: "Endereço",
-      details: ["Rua das Energias, 123", "São Paulo, SP - 01234-567"],
+      details: [
+        "Edifício Ventura Office",
+        "Av. Paulo Pereira Gomes, 1156-A",
+        "Morada de Laranjeiras, Serra - ES",
+        "CEP: 29166-828",
+      ],
       action: "#",
     },
     {
@@ -160,7 +165,7 @@ export default function ContatoPage() {
                       onChange={handleChange}
                       required
                       className="w-full"
-                      placeholder="(11) 99999-9999"
+                      placeholder="(27) 99263-2552"
                     />
                   </div>
                   <div>
@@ -184,7 +189,7 @@ export default function ContatoPage() {
                     required
                     rows={5}
                     className="w-full"
-                    placeholder="Descreva seu projeto ou dúvida..."
+                    placeholder="Conte sobre o seu consumo de energia (valor da conta, kWh, etc.)"
                   />
                 </div>
                 <Button type="submit" size="lg" className="w-full bg-[#FF6B35] hover:bg-[#FF6B35]/90 text-white">
@@ -201,15 +206,20 @@ export default function ContatoPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="space-y-8"
             >
-              {/* Map Placeholder */}
+              {/* Map */}
               <div className="bg-white rounded-2xl shadow-lg p-8">
                 <h3 className="text-2xl font-bold text-[#004E64] mb-6">Nossa Localização</h3>
-                <div className="bg-gray-100 rounded-xl h-64 flex items-center justify-center">
-                  <div className="text-center">
-                    <MapPin className="w-12 h-12 text-[#FF6B35] mx-auto mb-4" />
-                    <p className="text-gray-600">Mapa Interativo</p>
-                    <p className="text-sm text-gray-500">Rua das Energias, 123 - São Paulo, SP</p>
-                  </div>
+                <div className="rounded-xl overflow-hidden h-64">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4383.320656145741!2d-40.23091475089489!3d-20.19886400312071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb81e9e0e3044c9%3A0x5704ffc712b4e63f!2sAv.%20Paulo%20Pereira%20Gomes%2C%201156%20-%20a%20-%20Morada%20de%20Laranjeiras%2C%20Serra%20-%20ES%2C%2029166-828!5e0!3m2!1spt-BR!2sbr!4v1763927213037!5m2!1spt-BR!2sbr"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Localização GDTEC - Morada de Laranjeiras, Serra - ES"
+                  />
                 </div>
               </div>
 
@@ -219,7 +229,7 @@ export default function ContatoPage() {
                 <div className="space-y-4">
                   <div className="flex items-center">
                     <Phone className="w-5 h-5 mr-3" />
-                    <span>WhatsApp: (11) 99999-9999</span>
+                    <span>WhatsApp: (27) 99263-2552</span>
                   </div>
                   <div className="flex items-center">
                     <Mail className="w-5 h-5 mr-3" />
@@ -230,7 +240,14 @@ export default function ContatoPage() {
                     <span>Resposta em até 2 horas</span>
                   </div>
                 </div>
-                <Button size="lg" className="w-full mt-6 bg-white text-[#004E64] hover:bg-white/90">
+                <Button
+                  size="lg"
+                  className="w-full mt-6 bg-white text-[#004E64] hover:bg-white/90"
+                  onClick={() => {
+                    const message = encodeURIComponent("Olá! Gostaria de saber mais sobre energia solar da GDTEC.")
+                    window.open(`https://wa.me/5527992632552?text=${message}`, "_blank")
+                  }}
+                >
                   Chamar no WhatsApp
                 </Button>
               </div>
@@ -264,17 +281,13 @@ export default function ContatoPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button size="lg" className="bg-white text-[#004E64] hover:bg-white/90 px-8 py-4 text-lg font-semibold">
-              <Phone className="w-5 h-5 mr-2" />
-              Ligar Agora
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-[#004E64] px-8 py-4 text-lg bg-transparent"
-            >
-              Agendar Visita Técnica
-            </Button>
+            <a href="tel:+5527992632552">
+              <Button size="lg" className="bg-white text-[#004E64] hover:bg-white/90 px-8 py-4 text-lg font-semibold">
+                <Phone className="w-5 h-5 mr-2" />
+                Ligar Agora
+              </Button>
+            </a>
+            
           </motion.div>
         </div>
       </section>

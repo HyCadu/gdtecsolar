@@ -56,8 +56,7 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-[#111111] mb-2">Contato</h3>
-                    <p className="text-gray-600">(11) 99999-9999</p>
-                    <p className="text-gray-600">(11) 99999-9999</p>
+                    <p className="text-gray-600">(27) 99263-2552</p>
                   </div>
                 </div>
               </CardContent>
@@ -87,11 +86,13 @@ export default function ContactSection() {
                   <div>
                     <h3 className="font-semibold text-[#111111] mb-2">Endereço</h3>
                     <p className="text-gray-600">
-                      Rua das Energias, 123
+                      Edifício Ventura Office
                       <br />
-                      Vila Solar - São Paulo, SP
+                      Av. Paulo Pereira Gomes, 1156-A
                       <br />
-                      CEP: 01234-567
+                      Morada de Laranjeiras, Serra - ES
+                      <br />
+                      CEP: 29166-828
                     </p>
                   </div>
                 </div>
@@ -143,7 +144,7 @@ export default function ContactSection() {
 
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                      Telefone (opcional)
+                      Telefone *
                     </label>
                     <Input
                       id="phone"
@@ -152,7 +153,7 @@ export default function ContactSection() {
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full"
-                      placeholder="(11) 99999-9999"
+                      placeholder="(27) 99263-2552"
                     />
                   </div>
 
@@ -168,7 +169,7 @@ export default function ContactSection() {
                       onChange={handleChange}
                       rows={5}
                       className="w-full"
-                      placeholder="Conte-nos sobre seu projeto de energia solar..."
+                      placeholder="Conte sobre o seu consumo de energia (valor da conta, kWh, etc.)"
                     />
                   </div>
 

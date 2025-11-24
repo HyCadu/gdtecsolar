@@ -2,8 +2,10 @@
 
 import { Button } from "@/components/ui/button"
 import { Calculator, MessageCircle } from "lucide-react"
+import { useSimulator } from "@/contexts/simulator-context"
 
 export default function HeroSection() {
+  const { openSimulator } = useSimulator()
   return (
     <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Video */}
@@ -25,8 +27,8 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Headlines */}
         <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight px-2">
-          Transforme o Sol em
-          <span className="block text-[#FF6B35] mt-1 sm:mt-2">Economia Real</span>
+        Soluções solares que geram 
+          <span className="block text-[#FF6B35] mt-1 sm:mt-2">Economia e Sustentabilidade. </span>
         </h1>
 
         <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-4">
@@ -47,6 +49,7 @@ export default function HeroSection() {
           <Button
             size="lg"
             variant="outline"
+            onClick={openSimulator}
             className="border-2 border-white text-white hover:bg-white hover:text-[#004E64] px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full transition-all duration-300 transform hover:scale-105 bg-transparent relative group overflow-hidden w-full sm:w-auto"
           >
             <span className="relative z-10 flex items-center justify-center">
@@ -62,7 +65,7 @@ export default function HeroSection() {
         {/* Trust Indicators */}
         <div className="grid grid-cols-3 gap-4 sm:gap-8 text-white/90 px-4">
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-[#FF6B35] mb-1 sm:mb-2">+500</div>
+            <div className="text-2xl sm:text-3xl font-bold text-[#FF6B35] mb-1 sm:mb-2">+1.000</div>
             <div className="text-xs sm:text-sm uppercase tracking-wide leading-tight">Projetos Entregues</div>
           </div>
           <div className="text-center">

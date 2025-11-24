@@ -9,9 +9,10 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Calculator, X, MessageCircle, Zap } from "lucide-react"
+import { useSimulator } from "@/contexts/simulator-context"
 
 export default function SimulatorPanel() {
-  const [isOpen, setIsOpen] = useState(false)
+  const { isOpen, openSimulator, closeSimulator } = useSimulator()
   const [formData, setFormData] = useState({
     cep: "",
     state: "",
@@ -48,7 +49,7 @@ export default function SimulatorPanel() {
     <>
       {/* Floating Button */}
                       <Button
-          onClick={() => setIsOpen(true)}
+          onClick={openSimulator}
           className="fixed bottom-6 right-0 z-40 bg-[#FF6B35] hover:bg-[#FF6B35]/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-l-full pr-4 pl-6 py-7 flex items-center transform hover:scale-110 group hover:right-2"
         >
           <div className="relative mr-2">
@@ -70,7 +71,7 @@ export default function SimulatorPanel() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               className="flex-1 bg-black/50 backdrop-blur-sm" 
-              onClick={() => setIsOpen(false)} 
+              onClick={closeSimulator} 
             />
 
             {/* Panel */}
@@ -99,7 +100,7 @@ export default function SimulatorPanel() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() => setIsOpen(false)}
+                    onClick={closeSimulator}
                     className="text-white hover:bg-white/20"
                   >
                     <X className="w-5 h-5" />
@@ -210,17 +211,13 @@ export default function SimulatorPanel() {
                             <div className="text-xs text-gray-600">CO₂ evitado/ano</div>
                           </div>
                         </div>
-
-                        <div className="text-center text-sm text-gray-600 p-3 bg-blue-50 rounded-lg">
-                          💡 Investimento estimado: {results.systemCost}
-                        </div>
                       </CardContent>
                     </Card>
 
                     <div className="space-y-3">
                       <Button
                         className="w-full bg-[#25D366] hover:bg-[#25D366]/90 text-white"
-                        onClick={() => window.open("https://wa.me/5511999999999", "_blank")}
+                        onClick={() => window.open("https://wa.me/5527992632552", "_blank")}
                       >
                         <MessageCircle className="w-4 h-4 mr-2" />
                         Falar no WhatsApp
