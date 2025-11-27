@@ -29,7 +29,9 @@ function VideoPlayer({
 }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const [hasError, setHasError] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -57,12 +59,37 @@ function VideoPlayer({
     }
   }
 
-  const handleLoadedData = () => {
+  const handleLoadedMetadata = () => {
     setIsLoaded(true)
+    setIsLoading(false)
     // Atualiza a referência quando o vídeo é carregado
     if (setVideoRef && videoRef.current) {
       setVideoRef(videoRef.current)
     }
+  }
+
+  const handleCanPlay = () => {
+    setIsLoading(false)
+    setIsLoaded(true)
+  }
+
+  const handleLoadStart = () => {
+    setIsLoading(true)
+    setHasError(false)
+  }
+
+  const handleError = () => {
+    setIsLoading(false)
+    setHasError(true)
+    console.error("Erro ao carregar vídeo:", src)
+  }
+
+  const handleWaiting = () => {
+    setIsLoading(true)
+  }
+
+  const handlePlaying = () => {
+    setIsLoading(false)
   }
 
   const toggleFullscreen = async () => {
@@ -113,12 +140,21 @@ function VideoPlayer({
         ref={videoRef}
         src={src}
         className="w-full h-full object-contain"
-        onLoadedData={handleLoadedData}
-        onPlay={() => setIsPlaying(true)}
+        onLoadedMetadata={handleLoadedMetadata}
+        onCanPlay={handleCanPlay}
+        onLoadStart={handleLoadStart}
+        onError={handleError}
+        onWaiting={handleWaiting}
+        onPlaying={handlePlaying}
+        onPlay={() => {
+          setIsPlaying(true)
+          setIsLoading(false)
+        }}
         onPause={() => setIsPlaying(false)}
         onEnded={() => setIsPlaying(false)}
         playsInline
-        preload="metadata"
+        preload="auto"
+        muted={false}
       />
       
       {/* Overlay com controles */}
@@ -175,14 +211,46 @@ function VideoPlayer({
         </motion.button>
       )}
 
-      {/* Loading state */}
-      {!isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
+      {/* Loading state - apenas quando não há dados carregados */}
+      {isLoading && !isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-30">
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
             className="w-12 h-12 border-4 border-[#FF6B35] border-t-transparent rounded-full"
           />
+        </div>
+      )}
+      
+      {/* Loading sutil durante buffering */}
+      {isLoading && isLoaded && (
+        <div className="absolute top-4 right-4 z-30">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            className="w-8 h-8 border-2 border-white border-t-transparent rounded-full"
+          />
+        </div>
+      )}
+
+      {/* Error state */}
+      {hasError && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-30">
+          <div className="text-center text-white p-4">
+            <p className="text-sm">Erro ao carregar vídeo</p>
+            <button
+              onClick={() => {
+                setHasError(false)
+                setIsLoading(true)
+                if (videoRef.current) {
+                  videoRef.current.load()
+                }
+              }}
+              className="mt-2 text-[#FF6B35] hover:underline text-sm"
+            >
+              Tentar novamente
+            </button>
+          </div>
         </div>
       )}
     </motion.div>
@@ -193,19 +261,19 @@ function VideoPlayer({
 function VideoCarousel() {
   const videos = [
     {
-      src: "/vid/Depoimento1.MOV",
+      src: "/vid/Depoimento1.mp4",
       title: "Depoimento 1",
     },
     {
-      src: "/vid/Depoimento2.MOV",
+      src: "/vid/Depoimento2.mp4",
       title: "Depoimento 2",
     },
     {
-      src: "/vid/Depoimento3.MOV",
+      src: "/vid/depoimento3.mp4",
       title: "Depoimento 3",
     },
     {
-      src: "/vid/Depoimento4.MOV",
+      src: "/vid/Depoimento4.mp4",
       title: "Depoimento 4",
     },
   ]
