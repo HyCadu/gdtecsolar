@@ -1,9 +1,327 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Star, Quote, User } from "lucide-react"
+import { Star, Quote, User, Play, Pause, ArrowLeft, ArrowRight, Maximize2, Minimize2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { handleWhatsAppClick } from "@/components/whatsapp-button"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import { useState, useRef, useEffect, useCallback } from "react"
+
+// Componente de Vídeo do Carrossel
+function VideoPlayer({ 
+  src, 
+  title, 
+  index,
+  onPlay,
+  videoRef: setVideoRef
+}: { 
+  src: string
+  title: string
+  index: number
+  onPlay?: () => void
+  videoRef?: (ref: HTMLVideoElement | null) => void
+}) {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Expõe a referência do vídeo para o componente pai
+  useEffect(() => {
+    if (setVideoRef && videoRef.current) {
+      setVideoRef(videoRef.current)
+    }
+    return () => {
+      if (setVideoRef) {
+        setVideoRef(null)
+      }
+    }
+  }, [setVideoRef])
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause()
+      } else {
+        // Pausa todos os outros vídeos antes de tocar este
+        onPlay?.()
+        videoRef.current.play()
+      }
+    }
+  }
+
+  const handleLoadedData = () => {
+    setIsLoaded(true)
+    // Atualiza a referência quando o vídeo é carregado
+    if (setVideoRef && videoRef.current) {
+      setVideoRef(videoRef.current)
+    }
+  }
+
+  const toggleFullscreen = async () => {
+    if (!containerRef.current) return
+
+    try {
+      if (!isFullscreen) {
+        if (containerRef.current.requestFullscreen) {
+          await containerRef.current.requestFullscreen()
+        }
+      } else {
+        if (document.exitFullscreen) {
+          await document.exitFullscreen()
+        }
+      }
+    } catch (error) {
+      console.error("Erro ao alternar tela cheia:", error)
+    }
+  }
+
+  // Monitora mudanças de fullscreen
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement)
+    }
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange)
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange)
+    }
+  }, [])
+
+
+  return (
+    <motion.div
+      ref={containerRef}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="relative flex items-center justify-center rounded-xl overflow-hidden shadow-2xl bg-gray-900 group mx-auto"
+      style={{ 
+        aspectRatio: '9/16',
+        width: 'min(400px, 90vw)',
+        maxHeight: '80vh'
+      }}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        className="w-full h-full object-contain"
+        onLoadedData={handleLoadedData}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        onEnded={() => setIsPlaying(false)}
+        playsInline
+        preload="metadata"
+      />
+      
+      {/* Overlay com controles */}
+      <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent transition-opacity duration-300 z-10 ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-0'}`}>
+        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-2">
+          <h3 className="text-white font-semibold text-lg truncate">{title}</h3>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={togglePlay}
+              className="bg-[#FF6B35] hover:bg-[#FF6B35]/90 text-white rounded-full p-3 transition-all duration-300 hover:scale-110 shadow-lg"
+              aria-label={isPlaying ? "Pausar vídeo" : "Reproduzir vídeo"}
+            >
+              {isPlaying ? (
+                <Pause className="w-6 h-6" />
+              ) : (
+                <Play className="w-6 h-6 ml-1" />
+              )}
+            </button>
+            <button
+              onClick={toggleFullscreen}
+              className="bg-[#004E64] hover:bg-[#004E64]/90 text-white rounded-full p-3 transition-all duration-300 hover:scale-110 shadow-lg"
+              aria-label={isFullscreen ? "Sair da tela cheia" : "Tela cheia"}
+            >
+              {isFullscreen ? (
+                <Minimize2 className="w-6 h-6" />
+              ) : (
+                <Maximize2 className="w-6 h-6" />
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Botão de play central quando pausado */}
+      {!isPlaying && (
+        <motion.button
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          onClick={(e) => {
+            e.stopPropagation()
+            togglePlay()
+          }}
+          className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors duration-300 z-20"
+          aria-label="Reproduzir vídeo"
+          type="button"
+        >
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-20 h-20 bg-[#FF6B35] rounded-full flex items-center justify-center shadow-2xl pointer-events-none"
+          >
+            <Play className="w-10 h-10 text-white ml-1" />
+          </motion.div>
+        </motion.button>
+      )}
+
+      {/* Loading state */}
+      {!isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            className="w-12 h-12 border-4 border-[#FF6B35] border-t-transparent rounded-full"
+          />
+        </div>
+      )}
+    </motion.div>
+  )
+}
+
+// Componente do Carrossel de Vídeos
+function VideoCarousel() {
+  const videos = [
+    {
+      src: "/vid/Depoimento1.MOV",
+      title: "Depoimento 1",
+    },
+    {
+      src: "/vid/Depoimento2.MOV",
+      title: "Depoimento 2",
+    },
+    {
+      src: "/vid/Depoimento3.MOV",
+      title: "Depoimento 3",
+    },
+    {
+      src: "/vid/Depoimento4.MOV",
+      title: "Depoimento 4",
+    },
+  ]
+
+  const [api, setApi] = useState<any>(null)
+  const [current, setCurrent] = useState(0)
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
+
+  // Função para pausar todos os vídeos exceto o atual
+  const pauseAllVideosExcept = useCallback((currentIndex: number) => {
+    videoRefs.current.forEach((video, index) => {
+      if (video && index !== currentIndex && !video.paused) {
+        video.pause()
+      }
+    })
+  }, [])
+
+  // Callback quando um vídeo começa a tocar
+  const handleVideoPlay = useCallback((index: number) => {
+    pauseAllVideosExcept(index)
+  }, [pauseAllVideosExcept])
+
+  useEffect(() => {
+    if (!api) return
+
+    setCurrent(api.selectedScrollSnap())
+
+    api.on("select", () => {
+      const newIndex = api.selectedScrollSnap()
+      setCurrent(newIndex)
+      // Pausa todos os vídeos quando muda de slide
+      pauseAllVideosExcept(-1)
+    })
+  }, [api, pauseAllVideosExcept])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+      className="relative"
+    >
+      <Carousel
+        setApi={setApi}
+        opts={{
+          align: "start",
+          loop: true,
+        }}
+        className="w-full max-w-5xl mx-auto"
+      >
+        <CarouselContent className="-ml-2 md:-ml-4 flex items-center">
+          {videos.map((video, index) => (
+            <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-auto flex items-center justify-center">
+              <VideoPlayer 
+                src={video.src} 
+                title={video.title} 
+                index={index}
+                onPlay={() => handleVideoPlay(index)}
+                videoRef={(ref) => {
+                  videoRefs.current[index] = ref
+                }}
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        
+        {/* Botões de navegação desktop */}
+        <CarouselPrevious className="hidden md:flex -left-12 lg:-left-16 bg-white/90 hover:bg-white border-2 border-[#004E64] text-[#004E64] hover:text-[#FF6B35] shadow-lg transition-all duration-300 hover:scale-110" />
+        <CarouselNext className="hidden md:flex -right-12 lg:-right-16 bg-white/90 hover:bg-white border-2 border-[#004E64] text-[#004E64] hover:text-[#FF6B35] shadow-lg transition-all duration-300 hover:scale-110" />
+      </Carousel>
+
+      {/* Controles mobile e indicadores */}
+      <div className="mt-8 space-y-4">
+        {/* Botões de navegação mobile */}
+        <div className="flex justify-center gap-4 md:hidden">
+          <motion.button
+            onClick={() => api?.scrollPrev()}
+            className="bg-[#004E64] text-white p-3 rounded-full shadow-lg hover:bg-[#FF6B35] transition-colors duration-300"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Depoimento anterior"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </motion.button>
+          <motion.button
+            onClick={() => api?.scrollNext()}
+            className="bg-[#004E64] text-white p-3 rounded-full shadow-lg hover:bg-[#FF6B35] transition-colors duration-300"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Próximo depoimento"
+          >
+            <ArrowRight className="w-5 h-5" />
+          </motion.button>
+        </div>
+
+        {/* Indicadores de slide */}
+        <div className="flex justify-center gap-2">
+          {videos.map((_, index) => (
+            <motion.button
+              key={index}
+              onClick={() => api?.scrollTo(index)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                current === index
+                  ? "bg-[#FF6B35] w-8"
+                  : "bg-gray-300 w-2 hover:bg-gray-400"
+              }`}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label={`Ir para depoimento ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  )
+}
 
 export default function DepoimentosPage() {
   const testimonials = [
@@ -88,7 +406,7 @@ export default function DepoimentosPage() {
         </div>
       </section>
 
-      {/* Video Testimonials Section - Moved to top */}
+      {/* Video Testimonials Section - Carousel */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
@@ -99,38 +417,8 @@ export default function DepoimentosPage() {
           >
             Depoimentos em Vídeo
           </motion.h2>
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="bg-gray-100 rounded-xl aspect-video flex items-center justify-center overflow-hidden shadow-lg"
-            >
-              <div className="text-center w-full h-full flex items-center justify-center">
-                <div className="w-16 h-16 bg-[#FF6B35] rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:scale-110 transition-transform">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-                <p className="text-gray-600 font-medium">Depoimento - Fazenda Solar 500kW</p>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-gray-100 rounded-xl aspect-video flex items-center justify-center overflow-hidden shadow-lg"
-            >
-              <div className="text-center w-full h-full flex items-center justify-center">
-                <div className="w-16 h-16 bg-[#FF6B35] rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:scale-110 transition-transform">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-                <p className="text-gray-600 font-medium">Depoimento - Residencial 10kW</p>
-              </div>
-            </motion.div>
-          </div>
+          
+          <VideoCarousel />
         </div>
       </section>
 
