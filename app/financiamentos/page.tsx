@@ -119,7 +119,7 @@ export default function FinanciamentosPage() {
   return (
     <div className="min-h-screen bg-white pt-20">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-[#004E64] to-[#FF6B35]">
+      <section className="py-20 bg-[#004E64]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -130,8 +130,8 @@ export default function FinanciamentosPage() {
               <CreditCard className="w-5 h-5" />
               <span className="font-semibold text-sm">Financiamento</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Financiamento de Energia Solar GDTEC
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              <span className="text-[#FF6B35]">Financiamento de Energia Solar GDTEC</span>
             </h1>
             <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto mb-8">
               Troque sua conta de energia por uma parcela do seu financiamento
@@ -404,26 +404,33 @@ export default function FinanciamentosPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#004E64] to-[#FF6B35]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-20 bg-[#004E64] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#004E64] via-[#005A7A] to-[#004E64] opacity-50"></div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Pronto para começar sua economia?
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <span className="text-[#FF6B35]">Pronto para começar sua economia?</span>
             </h2>
             <p className="text-xl text-white/90 mb-8">
               Nossa equipe está pronta para encontrar a melhor opção de financiamento para o seu
               projeto de energia solar.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
               <Link href="/contato">
                 <Button
                   size="lg"
-                  className="bg-white text-[#004E64] hover:bg-white/90 px-8 py-6 text-lg font-semibold rounded-full"
+                  className="bg-white text-[#004E64] hover:bg-[#FF6B35] hover:text-white px-8 py-6 text-lg font-semibold rounded-full transition-all duration-300 transform hover:scale-105"
                 >
                   Solicitar Simulação
                   <ArrowRight className="w-5 h-5 ml-2" />
@@ -433,12 +440,12 @@ export default function FinanciamentosPage() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg font-semibold rounded-full bg-transparent"
+                  className="border-2 border-white text-white hover:bg-white hover:text-[#004E64] px-8 py-6 text-lg font-semibold rounded-full bg-transparent transition-all duration-300 transform hover:scale-105"
                 >
                   Falar com Especialista
                 </Button>
               </Link>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>

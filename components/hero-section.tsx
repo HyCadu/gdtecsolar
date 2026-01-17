@@ -51,17 +51,12 @@ export default function HeroSection() {
 
           <Button
             size="lg"
-            variant="outline"
             onClick={openSimulator}
-            className="border-2 border-white text-white hover:bg-white hover:text-[#004E64] px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full transition-all duration-300 transform hover:scale-105 bg-transparent relative group overflow-hidden w-full sm:w-auto"
+            className="bg-[#004E64] text-white border border-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
           >
-            <span className="relative z-10 flex items-center justify-center">
-              <Calculator className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
-              <span className="hidden sm:inline">Descubra quanto você pode economizar!</span>
-              <span className="sm:hidden">Simular Economia</span>
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-[#FF6B35] to-[#004E64] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-            <div className="absolute inset-0 bg-white/10 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <Calculator className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+            <span className="hidden sm:inline">Descubra quanto você pode economizar!</span>
+            <span className="sm:hidden">Simular Economia</span>
           </Button>
         </div>
 

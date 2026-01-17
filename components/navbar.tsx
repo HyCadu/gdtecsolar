@@ -34,7 +34,6 @@ export default function Navbar() {
     },
     { href: "/cases", label: "Projetos de Sucesso" },
     { href: "/financiamentos", label: "Financiamentos" },
-    { href: "/depoimentos", label: "Depoimentos" },
     { href: "/contato", label: "Contato" },
     { href: "/faq", label: "FAQ" },
   ]

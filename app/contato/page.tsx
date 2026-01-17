@@ -65,15 +65,15 @@ export default function ContatoPage() {
   return (
     <div className="min-h-screen bg-white pt-20">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-[#004E64] to-[#FF6B35]">
+      <section className="py-20 bg-[#004E64]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-6xl font-bold text-white mb-6"
+            className="text-4xl md:text-6xl font-bold mb-6"
           >
-            Entre em Contato
+            <span className="text-[#FF6B35]">Entre em Contato</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -256,32 +256,36 @@ export default function ContatoPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#004E64] to-[#FF6B35]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-20 bg-[#004E64] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#004E64] via-[#005A7A] to-[#004E64] opacity-50"></div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl font-bold text-white mb-6"
+            className="text-3xl md:text-4xl font-bold mb-6"
           >
-            Prefere falar por telefone?
+            <span className="text-[#FF6B35]">Prefere falar por telefone?</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-white/90 mb-8"
           >
             Nossa equipe está disponível para esclarecer suas dúvidas e fazer seu orçamento
           </motion.p>
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <a href="tel:+5527992632552">
-              <Button size="lg" className="bg-white text-[#004E64] hover:bg-white/90 px-8 py-4 text-lg font-semibold">
+              <Button size="lg" className="bg-white text-[#004E64] hover:bg-[#FF6B35] hover:text-white px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105">
                 <Phone className="w-5 h-5 mr-2" />
                 Ligar Agora
               </Button>

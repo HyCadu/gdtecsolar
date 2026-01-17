@@ -16,17 +16,10 @@ const partners = [
     logo: "/fronius-inverter-logo.png",
   },
   {
-    name: "SMA",
-    logo: "/placeholder.svg?height=80&width=160",
+    name: "Fortlev Solar",
+    logo: "/logo_fortlev-solar.svg",
   },
-  {
-    name: "Growatt",
-    logo: "/placeholder.svg?height=80&width=160",
-  },
-  {
-    name: "Trina Solar",
-    logo: "/placeholder.svg?height=80&width=160",
-  },
+
 ]
 
 const differentiators = [
@@ -60,22 +53,22 @@ export default function PartnersCertifications() {
         <div className="mb-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-[#111111] mb-4">
-              Marcas
-              <span className="text-[#FF6B35]"> de Qualidade</span>
+              Nossos
+              <span className="text-[#FF6B35]"> Parceiros</span>
             </h2>
             <p className="text-lg text-gray-600">Trabalhamos com as melhores marcas do mercado mundial</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
+          <div className="flex flex-wrap justify-center gap-8 items-center">
             {partners.map((partner, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-105"
+                className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-105 w-40 h-24"
               >
                 <img
                   src={partner.logo || "/placeholder.svg"}
                   alt={partner.name}
-                  className="max-h-12 w-auto opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  className={`w-auto opacity-70 hover:opacity-100 transition-opacity duration-300 ${partner.name === "Fortlev Solar" ? "max-h-8" : "max-h-12"}`}
                 />
               </div>
             ))}

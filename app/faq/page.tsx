@@ -98,7 +98,7 @@ export default function FAQPage() {
   return (
     <div className="min-h-screen bg-white pt-20">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-[#004E64] to-[#FF6B35]">
+      <section className="py-20 bg-[#004E64]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -107,7 +107,9 @@ export default function FAQPage() {
             className="flex items-center justify-center mb-6"
           >
             <HelpCircle className="w-12 h-12 text-white mr-4" />
-            <h1 className="text-4xl md:text-6xl font-bold text-white">Perguntas Frequentes</h1>
+            <h1 className="text-4xl md:text-6xl font-bold">
+              <span className="text-[#FF6B35]">Perguntas Frequentes</span>
+            </h1>
           </motion.div>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -223,34 +225,35 @@ export default function FAQPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#004E64] to-[#FF6B35]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-20 bg-[#004E64] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#004E64] via-[#005A7A] to-[#004E64] opacity-50"></div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl font-bold text-white mb-6"
+            className="text-3xl md:text-4xl font-bold mb-6"
           >
-            Pronto para começar?
+            <span className="text-[#FF6B35]">Pronto para começar?</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-white/90 mb-8"
           >
             Solicite um orçamento gratuito e descubra quanto você pode economizar
           </motion.p>
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <Button size="lg" className="bg-white text-[#004E64] hover:bg-white/90 px-8 py-4 text-lg font-semibold relative group">
-              <span className="relative">
-                Solicitar Orçamento Grátis
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#004E64] transition-all duration-300 group-hover:w-full"></span>
-              </span>
+            <Button size="lg" className="bg-white text-[#004E64] hover:bg-[#FF6B35] hover:text-white px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+              Solicitar Orçamento Grátis
             </Button>
           </motion.div>
         </div>

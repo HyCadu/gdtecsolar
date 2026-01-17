@@ -8,7 +8,7 @@ export default function ResidencialPage() {
   return (
     <main className="pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#004E64] to-[#FF6B35] py-20">
+      <section className="bg-[#004E64] py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
@@ -16,7 +16,9 @@ export default function ResidencialPage() {
                 <Home className="w-12 h-12 text-white mr-4" />
                 <span className="text-white/80 text-lg font-medium">Segmento Residencial</span>
               </div>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Energia Solar Residencial</h1>
+              <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                <span className="text-[#FF6B35]">Energia Solar Residencial</span>
+              </h1>
               <p className="text-xl text-white/90 mb-8 leading-relaxed">
                 Transforme sua casa em uma fonte de energia limpa e econômica
               </p>
@@ -139,15 +141,18 @@ export default function ResidencialPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#004E64] to-[#FF6B35]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Pronto para Economizar?</h2>
+      <section className="py-20 bg-[#004E64] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#004E64] via-[#005A7A] to-[#004E64] opacity-50"></div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <span className="text-[#FF6B35]">Pronto para Economizar?</span>
+            </h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               Faça uma simulação gratuita e descubra quanto você pode economizar com energia solar
             </p>
             <Link href="/contato">
-            <button className="bg-white text-[#004E64] px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/90 transition-colors inline-flex items-center">
+            <button className="bg-white text-[#004E64] px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[#FF6B35] hover:text-white transition-all duration-300 transform hover:scale-105 inline-flex items-center">
               Solicitar Orçamento Gratuito
             </button>
             </Link>
