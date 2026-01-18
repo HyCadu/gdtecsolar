@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Calculator, MessageCircle } from "lucide-react"
 import { useSimulator } from "@/contexts/simulator-context"
@@ -7,8 +8,25 @@ import Link from "next/link"
 
 export default function HeroSection() {
   const { openSimulator } = useSimulator()
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [isHovering, setIsHovering] = useState(false)
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    })
+  }
+
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 sm:pt-32 lg:pt-20">
+    <section 
+      id="inicio" 
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 sm:pt-32 lg:pt-20"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         <video
@@ -22,6 +40,17 @@ export default function HeroSection() {
         </video>
         <div className="absolute inset-0 bg-gradient-to-br from-[#004E64]/80 via-[#004E64]/70 to-[#FF6B35]/30"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-[#004E64]/80 to-transparent"></div>
+        
+        {/* Mouse-following glow with trail */}
+        {isHovering && (
+          <div
+            className="absolute w-48 h-48 bg-[#FF6B35]/15 rounded-full blur-2xl pointer-events-none transition-all duration-500 ease-out"
+            style={{
+              left: mousePosition.x - 96,
+              top: mousePosition.y - 96,
+            }}
+          />
+        )}
       </div>
 
       {/* Content */}

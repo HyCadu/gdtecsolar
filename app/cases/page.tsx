@@ -64,34 +64,35 @@ const videoTestimonials = [
 ]
 
 function VideoTestimonialsCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(1)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
 
   const handlePlayPause = () => {
-    if (videoRef.current) {
+    const currentVideo = videoRefs.current[currentIndex]
+    if (currentVideo) {
       if (isPlaying) {
-        videoRef.current.pause()
+        currentVideo.pause()
       } else {
-        videoRef.current.play()
+        currentVideo.play()
       }
       setIsPlaying(!isPlaying)
     }
   }
 
   const handleMuteToggle = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted
+    const currentVideo = videoRefs.current[currentIndex]
+    if (currentVideo) {
+      currentVideo.muted = !isMuted
       setIsMuted(!isMuted)
     }
   }
 
   const handleFullscreen = () => {
-    if (videoRef.current) {
-      if (videoRef.current.requestFullscreen) {
-        videoRef.current.requestFullscreen()
-      }
+    const currentVideo = videoRefs.current[currentIndex]
+    if (currentVideo && currentVideo.requestFullscreen) {
+      currentVideo.requestFullscreen()
     }
   }
 
@@ -105,76 +106,141 @@ function VideoTestimonialsCarousel() {
     setIsPlaying(false)
   }
 
+  const handleVideoClick = (index: number) => {
+    setCurrentIndex(index)
+    setIsPlaying(false)
+  }
+
+  const getVisibleVideos = () => {
+    const prev = currentIndex === 0 ? videoTestimonials.length - 1 : currentIndex - 1
+    const next = currentIndex === videoTestimonials.length - 1 ? 0 : currentIndex + 1
+    return [prev, currentIndex, next]
+  }
+
+  const visibleIndices = getVisibleVideos()
+
   return (
-    <section className="py-20 bg-[#F5F5F5]">
+    <section className="pt-0 pb-0 bg-[#F5F5F5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-center">
-          {/* Main Video Player - Vertical Story Format */}
-          <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl" style={{ width: '360px', height: '640px' }}>
-            <video
-              ref={videoRef}
-              src={videoTestimonials[currentIndex].videoUrl}
-              className="w-full h-full object-cover"
-              onEnded={() => setIsPlaying(false)}
-            />
-            
-            {/* Video Controls Overlay */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <button
-                    onClick={handlePlayPause}
-                    className="text-white hover:text-[#FF6B35] transition-colors"
-                  >
-                    {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
-                  </button>
-                  <button
-                    onClick={handleMuteToggle}
-                    className="text-white hover:text-[#FF6B35] transition-colors"
-                  >
-                    {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
-                  </button>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-white text-sm font-medium">
-                    {currentIndex + 1} / {videoTestimonials.length}
-                  </span>
-                  <button
-                    onClick={handleFullscreen}
-                    className="text-white hover:text-[#FF6B35] transition-colors"
-                  >
-                    <Maximize className="w-6 h-6" />
-                  </button>
-                </div>
-              </div>
-            </div>
+        <div className="relative flex items-center justify-center gap-4 md:gap-6">
+          {/* Navigation Arrow Left */}
+          <button
+            onClick={handlePrevious}
+            className="absolute left-0 md:left-4 z-20 bg-[#004E64] hover:bg-[#FF6B35] text-white rounded-full p-3 transition-all shadow-lg hover:scale-110"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
 
-            {/* Navigation Arrows */}
-            <button
-              onClick={handlePrevious}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-all"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={handleNext}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-all"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-
-            {/* Progress Indicators */}
-            <div className="absolute top-4 left-4 right-4 flex gap-1">
-              {videoTestimonials.map((_, index) => (
-                <div
-                  key={index}
-                  className={`h-1 flex-1 rounded-full transition-all ${
-                    index === currentIndex ? 'bg-[#FF6B35]' : 'bg-white/30'
+          {/* Carousel Container */}
+          <div className="flex items-center justify-center gap-4 md:gap-6 overflow-hidden">
+            {visibleIndices.map((videoIndex, position) => {
+              const isCenter = position === 1
+              const videoWidth = isCenter ? 360 : 240
+              const videoHeight = isCenter ? 640 : 426
+              
+              return (
+                <motion.div
+                  key={videoIndex}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ 
+                    opacity: isCenter ? 1 : 0.5,
+                    scale: isCenter ? 1 : 0.7,
+                  }}
+                  transition={{ duration: 0.5 }}
+                  className={`relative bg-black rounded-2xl overflow-hidden ${
+                    isCenter ? 'shadow-2xl z-10' : 'shadow-lg cursor-pointer'
                   }`}
-                />
-              ))}
-            </div>
+                  style={{ width: `${videoWidth}px`, height: `${videoHeight}px` }}
+                  onClick={() => !isCenter && handleVideoClick(videoIndex)}
+                >
+                  <video
+                    ref={(el) => {
+                      videoRefs.current[videoIndex] = el
+                    }}
+                    src={videoTestimonials[videoIndex].videoUrl}
+                    className="w-full h-full object-cover cursor-pointer"
+                    onEnded={() => setIsPlaying(false)}
+                    onClick={() => isCenter && handlePlayPause()}
+                    muted={!isCenter || isMuted}
+                  />
+                  
+                  {/* Overlay for side videos */}
+                  {!isCenter && (
+                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                      <Play className="w-12 h-12 text-white opacity-70" />
+                    </div>
+                  )}
+
+                  {/* Video Controls Overlay - Only for center video */}
+                  {isCenter && (
+                    <>
+                      {/* Subtle Play Button Overlay - Shows when not playing */}
+                      {!isPlaying && (
+                        <div 
+                          className="absolute inset-0 flex items-center justify-center cursor-pointer z-10"
+                          onClick={handlePlayPause}
+                        >
+                          <div className="bg-white/90 rounded-full p-4 shadow-lg hover:bg-white transition-all duration-300">
+                            <Play className="w-12 h-12 text-[#FF6B35] fill-[#FF6B35]" />
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <button
+                              onClick={handlePlayPause}
+                              className="text-white hover:text-[#FF6B35] transition-colors"
+                            >
+                              {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
+                            </button>
+                            <button
+                              onClick={handleMuteToggle}
+                              className="text-white hover:text-[#FF6B35] transition-colors"
+                            >
+                              {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
+                            </button>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="text-white text-sm font-medium">
+                              {currentIndex + 1} / {videoTestimonials.length}
+                            </span>
+                            <button
+                              onClick={handleFullscreen}
+                              className="text-white hover:text-[#FF6B35] transition-colors"
+                            >
+                              <Maximize className="w-6 h-6" />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Progress Indicators */}
+                      <div className="absolute top-4 left-4 right-4 flex gap-1">
+                        {videoTestimonials.map((_, index) => (
+                          <div
+                            key={index}
+                            className={`h-1 flex-1 rounded-full transition-all ${
+                              index === currentIndex ? 'bg-[#FF6B35]' : 'bg-white/30'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </motion.div>
+              )
+            })}
           </div>
+
+          {/* Navigation Arrow Right */}
+          <button
+            onClick={handleNext}
+            className="absolute right-0 md:right-4 z-20 bg-[#004E64] hover:bg-[#FF6B35] text-white rounded-full p-3 transition-all shadow-lg hover:scale-110"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
         </div>
       </div>
     </section>
@@ -185,8 +251,17 @@ export default function CasesPage() {
   return (
     <main className="pt-20">
       {/* Hero Section */}
-      <section className="bg-[#004E64] py-20">
-        <div className="container mx-auto px-4">
+      <section className="relative py-24 overflow-hidden">
+        {/* Background with subtle gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#003847] via-[#004E64] to-[#005A75]"></div>
+        
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF6B35]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#005A75]/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+        <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-white/20 rounded-full"></div>
+        <div className="absolute top-1/3 right-1/3 w-3 h-3 bg-[#FF6B35]/30 rounded-full"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -253,7 +328,7 @@ export default function CasesPage() {
       </section>
 
       {/* Testimonials Section Title */}
-      <section className="pt-12 pb-4 bg-[#F5F5F5]">
+      <section className="pt-16 pb-8 bg-[#F5F5F5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
@@ -267,7 +342,7 @@ export default function CasesPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-gray-600 max-w-3xl mx-auto"
+            className="text-xl text-gray-600 max-w-3xl mx-auto mb-8"
           >
             Veja o que nossos clientes falam sobre a experiência com a GDTEC
           </motion.p>
@@ -278,26 +353,28 @@ export default function CasesPage() {
       <VideoTestimonialsCarousel />
 
       {/* Stats Section */}
-      <section className="py-20 bg-[#F5F5F5]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { number: "98%", label: "Satisfação dos Clientes" },
-              { number: "5000+", label: "Depoimentos Positivos" },
-              { number: "4.9/5", label: "Avaliação Média" },
-              { number: "95%", label: "Recomendação" },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-4xl md:text-5xl font-bold text-[#FF6B35] mb-2">{stat.number}</div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
+      <section className="pt-8 pb-12 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-[#004E64] to-[#003847] rounded-2xl shadow-xl p-8 md:p-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { number: "98%", label: "Satisfação dos Clientes" },
+                { number: "5000+", label: "Depoimentos Positivos" },
+                { number: "4.9/5", label: "Avaliação Média" },
+                { number: "95%", label: "Recomendação" },
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="text-center"
+                >
+                  <div className="text-3xl md:text-5xl font-bold text-[#FF6B35] mb-2">{stat.number}</div>
+                  <div className="text-white/90 font-medium text-sm md:text-base">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

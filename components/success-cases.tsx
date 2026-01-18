@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Star, ArrowRight } from "lucide-react"
@@ -35,7 +36,7 @@ const cases = [
   {
     id: 3,
     title: "Fazenda de Café - Interior de MG",
-    image: "/coffee-farm-solar.png",
+    image: "/coffee-farm-solar.jpeg",
     problem: "Custos elevados com energia para irrigação e processamento do café.",
     solution: "Sistema de 50kWp adaptado às condições rurais com estruturas reforçadas.",
     result: "Economia de 90% na conta de luz, maior sustentabilidade.",
@@ -74,83 +75,86 @@ export default function SuccessCases() {
   const currentCaseData = cases[currentCase]
 
   return (
-    <section id="cases" className="py-16 md:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="cases" className="py-12 md:py-16 bg-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#111111] mb-6">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#111111] mb-4">
             Projetos de
             <span className="text-[#FF6B35]"> Sucesso</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
             Conheça alguns dos nossos projetos que transformaram a relação dos clientes com a energia elétrica.
           </p>
         </div>
 
         {/* Case Carousel */}
         <div className="relative">
-          <Card className="overflow-hidden shadow-2xl">
+          <Card className="overflow-hidden shadow-xl">
             <div className="grid grid-cols-1 lg:grid-cols-2">
               {/* Image */}
-              <div className="relative h-64 lg:h-auto">
-                <img
+              <div className="relative h-48 lg:h-auto bg-gray-100">
+                <Image
                   src={currentCaseData.image || "/placeholder.svg"}
                   alt={currentCaseData.title}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  quality={95}
+                  priority
                 />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-[#FF6B35] text-white px-3 py-1 rounded-full text-sm font-medium">
+                <div className="absolute top-3 left-3 z-10">
+                  <span className="bg-[#FF6B35] text-white px-2.5 py-1 rounded-full text-xs font-medium">
                     {currentCaseData.segment}
                   </span>
                 </div>
               </div>
 
               {/* Content */}
-              <CardContent className="p-8 lg:p-12 flex flex-col justify-center">
-                <h3 className="text-2xl md:text-3xl font-bold text-[#111111] mb-6">{currentCaseData.title}</h3>
+              <CardContent className="p-6 lg:p-8 flex flex-col justify-center">
+                <h3 className="text-xl md:text-2xl font-bold text-[#111111] mb-4">{currentCaseData.title}</h3>
 
-                <div className="space-y-6">
+                <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold text-[#004E64] mb-2">Desafio:</h4>
-                    <p className="text-gray-600">{currentCaseData.problem}</p>
+                    <h4 className="font-semibold text-[#004E64] mb-1.5 text-sm">Desafio:</h4>
+                    <p className="text-gray-600 text-sm">{currentCaseData.problem}</p>
                   </div>
 
                   <div>
-                    <h4 className="font-semibold text-[#004E64] mb-2">Solução:</h4>
-                    <p className="text-gray-600">{currentCaseData.solution}</p>
+                    <h4 className="font-semibold text-[#004E64] mb-1.5 text-sm">Solução:</h4>
+                    <p className="text-gray-600 text-sm">{currentCaseData.solution}</p>
                   </div>
 
                   <div>
-                    <h4 className="font-semibold text-[#004E64] mb-2">Resultado:</h4>
-                    <p className="text-gray-600">{currentCaseData.result}</p>
+                    <h4 className="font-semibold text-[#004E64] mb-1.5 text-sm">Resultado:</h4>
+                    <p className="text-gray-600 text-sm">{currentCaseData.result}</p>
                   </div>
 
                   {/* Stats */}
-                  <div className="grid grid-cols-2 gap-3 py-4">
-                    <div className="text-center p-3 bg-[#F5F5F5] rounded-lg">
-                      <div className="text-xl font-bold text-[#FF6B35] mb-1">{currentCaseData.power}</div>
+                  <div className="grid grid-cols-2 gap-2.5 py-3">
+                    <div className="text-center p-2.5 bg-[#F5F5F5] rounded-lg">
+                      <div className="text-lg font-bold text-[#FF6B35] mb-0.5">{currentCaseData.power}</div>
                       <div className="text-xs text-gray-600 leading-tight">Potência Instalada</div>
                     </div>
-                    <div className="text-center p-3 bg-[#F5F5F5] rounded-lg">
-                      <div className="text-xl font-bold text-[#FF6B35] mb-1">{currentCaseData.savings}</div>
+                    <div className="text-center p-2.5 bg-[#F5F5F5] rounded-lg">
+                      <div className="text-lg font-bold text-[#FF6B35] mb-0.5">{currentCaseData.savings}</div>
                       <div className="text-xs text-gray-600 leading-tight">Economia Anual</div>
                     </div>
                   </div>
 
                   {/* Testimonial */}
-                  <div className="bg-[#004E64] p-6 rounded-lg text-white">
-                    <div className="flex items-center mb-3">
+                  <div className="bg-[#004E64] p-4 rounded-lg text-white">
+                    <div className="flex items-center mb-2">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-[#FF6B35] text-[#FF6B35]" />
+                        <Star key={i} className="w-3.5 h-3.5 fill-[#FF6B35] text-[#FF6B35]" />
                       ))}
                     </div>
-                    <p className="italic mb-3">"{currentCaseData.testimonial}"</p>
-                    <p className="font-semibold">— {currentCaseData.client}</p>
+                    <p className="italic mb-2 text-sm">"{currentCaseData.testimonial}"</p>
+                    <p className="font-semibold text-sm">— {currentCaseData.client}</p>
                   </div>
 
-                  <Button className="w-full bg-[#FF6B35] hover:bg-[#FF6B35]/90 text-white">
+                  <Button className="w-full bg-[#FF6B35] hover:bg-[#FF6B35]/90 text-white text-sm py-2">
                     Ver Detalhes do Projeto
-                    <ArrowRight className="w-4 h-4 ml-2" />
+                    <ArrowRight className="w-3.5 h-3.5 ml-2" />
                   </Button>
                 </div>
               </CardContent>
@@ -161,28 +165,28 @@ export default function SuccessCases() {
           <Button
             variant="outline"
             size="icon"
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg"
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg w-8 h-8"
             onClick={prevCase}
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="w-3.5 h-3.5" />
           </Button>
 
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg w-8 h-8"
             onClick={nextCase}
           >
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-3.5 h-3.5" />
           </Button>
         </div>
 
         {/* Dots Indicator */}
-        <div className="flex justify-center mt-8 space-x-2">
+        <div className="flex justify-center mt-6 space-x-2">
           {cases.map((_, index) => (
             <button
               key={index}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                 index === currentCase ? "bg-[#FF6B35]" : "bg-gray-300"
               }`}
               onClick={() => {

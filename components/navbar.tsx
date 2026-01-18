@@ -20,7 +20,6 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "/", label: "Início" },
-    { href: "/sobre", label: "Sobre Nós" },
     {
       href: "/segmentos",
       label: "Segmentos",
@@ -34,6 +33,7 @@ export default function Navbar() {
     },
     { href: "/cases", label: "Projetos de Sucesso" },
     { href: "/financiamentos", label: "Financiamentos" },
+    { href: "/sobre", label: "Sobre Nós" },
     { href: "/contato", label: "Contato" },
     { href: "/faq", label: "FAQ" },
   ]

@@ -5,8 +5,19 @@ import { Building, TrendingUp, Shield, Clock, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Phone } from "lucide-react"
+import { useState } from "react"
 
 export default function ComercialPage() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [isHovering, setIsHovering] = useState(false)
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    })
+  }
   const benefits = [
     "Redução de até 95% na conta de luz",
     "Retorno do investimento em 3-5 anos",
@@ -36,14 +47,44 @@ export default function ComercialPage() {
   return (
     <div className="min-h-screen bg-white pt-20">
       {/* Hero Section */}
-      <section className="py-20 bg-[#004E64]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section 
+        className="relative py-24 overflow-hidden"
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+      >
+        {/* Background with subtle gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#003847] via-[#004E64] to-[#005A75]"></div>
+        
+        {/* Mouse-following glow with trail */}
+        {isHovering && (
+          <div
+            className="absolute w-48 h-48 bg-[#FF6B35]/15 rounded-full blur-2xl pointer-events-none transition-all duration-500 ease-out"
+            style={{
+              left: mousePosition.x - 96,
+              top: mousePosition.y - 96,
+            }}
+          />
+        )}
+        
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF6B35]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#005A75]/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+        <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-white/20 rounded-full"></div>
+        <div className="absolute top-1/3 right-1/3 w-3 h-3 bg-[#FF6B35]/30 rounded-full"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-              <div className="flex items-center mb-6">
-                <Building className="w-12 h-12 text-white mr-4" />
-                <span className="text-white/80 text-lg font-medium">Segmento Comercial</span>
-              </div>
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6"
+              >
+                <Building className="w-5 h-5 text-[#FF6B35] mr-2" />
+                <span className="text-white/90 text-sm font-medium">Segmento Comercial</span>
+              </motion.div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
                 <span className="text-[#FF6B35]">Energia Solar para Empresas</span>
               </h1>
@@ -51,7 +92,7 @@ export default function ComercialPage() {
                 Reduza custos operacionais e aumente a competitividade do seu negócio com energia solar comercial
               </p>
               <Link href="/contato">
-              <Button size="lg" className="bg-white text-[#004E64] hover:bg-white/90 px-8 py-4 text-lg font-semibold">
+              <Button size="lg" className="bg-white text-[#004E64] hover:bg-[#FF6B35] hover:text-white px-8 py-4 text-lg font-semibold transition-all duration-300">
                 Solicitar Orçamento
               </Button>
               </Link>
@@ -62,11 +103,19 @@ export default function ComercialPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <img
-                src="/factory-solar-installation.png"
-                alt="Energia Solar Comercial"
-                className="rounded-2xl shadow-2xl w-full h-auto"
-              />
+              {/* Image container with decorative border */}
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#FF6B35]/50 to-[#005A75]/50 rounded-2xl blur-sm"></div>
+                <img
+                  src="/factory-solar-installation.png"
+                  alt="Energia Solar Comercial"
+                  className="relative rounded-2xl shadow-2xl w-full h-auto border border-white/10"
+                />
+              </div>
+              {/* Floating accent */}
+              <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-[#FF6B35] rounded-xl flex items-center justify-center shadow-lg">
+                <TrendingUp className="w-10 h-10 text-white" />
+              </div>
             </motion.div>
           </div>
         </div>
