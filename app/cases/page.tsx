@@ -302,7 +302,7 @@ export default function CasesPage() {
                   </div>
                   <h3 className="text-xl font-bold text-gdtec-dark mb-3">{case_.title}</h3>
                   <p className="text-gray-600 mb-4">{case_.description}</p>
-                  <div className="space-y-2 mb-6">
+                  <div className="space-y-2">
                     <div className="flex items-center text-gray-700">
                       <MapPin className="w-4 h-4 mr-2 text-gdtec-blue" />
                       {case_.location}
@@ -316,10 +316,6 @@ export default function CasesPage() {
                       {case_.savings} de economia
                     </div>
                   </div>
-                  <button className="w-full bg-gdtec-blue text-white py-3 rounded-lg hover:bg-gdtec-blue/90 transition-colors flex items-center justify-center">
-                    Ver Detalhes
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </button>
                 </div>
               </motion.div>
             ))}
